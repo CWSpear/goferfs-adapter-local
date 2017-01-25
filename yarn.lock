@@ -464,9 +464,13 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-goferfs-test-suite@^0.4.0:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/goferfs-test-suite/-/goferfs-test-suite-0.4.1.tgz#08ab2992de69190255b9a4509aaedd23b757a68c"
+goferfs-interfaces@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/goferfs-interfaces/-/goferfs-interfaces-0.5.4.tgz#960165e6a247874b635c6e5cc7d178fd5ecc5c1f"
+
+goferfs-test-suite@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/goferfs-test-suite/-/goferfs-test-suite-0.5.0.tgz#904d993d9a1b21e65f5a07be3ea342c9c191c6a5"
   dependencies:
     "@types/chai" "^3.4.34"
     "@types/chai-as-promised" "^0.0.29"
@@ -475,16 +479,20 @@ goferfs-test-suite@^0.4.0:
     "@types/node" "^6.0.52"
     chai "^3.5.0"
     chai-as-promised "^6.0.0"
-    goferfs types
+    goferfs "^0.4.1"
     mocha "^3.2.0"
     np "^2.12.0"
     rimraf "^2.5.4"
     tslint "^4.3.1"
     typescript "^2.1.5"
 
-goferfs@types:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/goferfs/-/goferfs-0.3.7.tgz#1c243b97d1f3bcef5a0150f7ce212b335ce1c287"
+goferfs-types@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/goferfs-types/-/goferfs-types-0.5.4.tgz#679761a604b7234c09dcfb6b63ad847d31da590b"
+
+goferfs@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/goferfs/-/goferfs-0.4.1.tgz#3a3d7f734695529a3059275cab068d80483c4f47"
 
 got@^5.0.0:
   version "5.7.1"
