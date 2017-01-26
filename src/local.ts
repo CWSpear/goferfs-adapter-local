@@ -4,7 +4,7 @@ import { resolve, basename, dirname, extname, relative } from 'path';
 import { lookup as mimeLookup } from 'mime';
 import * as Bluebird from 'bluebird';
 
-import { IMetadata, IStreamFile, IAdapter } from 'goferfs-interfaces';
+import { IAdapter } from 'goferfs-interfaces';
 import { Visibility, Metadata, File, StreamFile } from 'goferfs-types';
 
 export default class LocalAdapter implements IAdapter {
@@ -28,7 +28,7 @@ export default class LocalAdapter implements IAdapter {
         this.privateVisibilityMode = privateVisibilityMode;
     }
 
-    async write(path: string, contents: string, { visibility }: { visibility: Visibility } = { visibility: Visibility.Public }): Promise<IMetadata> {
+    async write(path: string, contents: string, { visibility }: { visibility: Visibility } = { visibility: Visibility.Public }): Promise<Metadata> {
         path = this.fullPath(path);
 
         // @TODO broken type here (mode isn't accepted)
@@ -38,7 +38,7 @@ export default class LocalAdapter implements IAdapter {
         return this.getMetadata(path);
     }
 
-    async writeStream(path: string, stream: Stream, { visibility }: { visibility: Visibility } = { visibility: Visibility.Public }): Promise<IMetadata> {
+    async writeStream(path: string, stream: Stream, { visibility }: { visibility: Visibility } = { visibility: Visibility.Public }): Promise<Metadata> {
         path = this.fullPath(path);
 
         stream.pipe(fs.createWriteStream(path, { mode: this.getMode(visibility) }));
@@ -51,7 +51,7 @@ export default class LocalAdapter implements IAdapter {
         return this.getMetadata(path);
     }
 
-    async move(oldPath: string, newPath: string): Promise<IMetadata> {
+    async move(oldPath: string, newPath: string): Promise<Metadata> {
         oldPath = this.fullPath(oldPath);
         newPath = this.fullPath(newPath);
 
@@ -60,7 +60,7 @@ export default class LocalAdapter implements IAdapter {
         return this.getMetadata(newPath);
     }
 
-    async copy(oldPath: string, clonedPath: string): Promise<IMetadata> {
+    async copy(oldPath: string, clonedPath: string): Promise<Metadata> {
         oldPath = this.fullPath(oldPath);
         clonedPath = this.fullPath(clonedPath);
 
@@ -85,7 +85,7 @@ export default class LocalAdapter implements IAdapter {
         return true;
     }
 
-    async createDir(path: string): Promise<IMetadata> {
+    async createDir(path: string): Promise<Metadata> {
         path = this.fullPath(path);
 
         await fs.ensureDirAsync(path);
@@ -93,7 +93,7 @@ export default class LocalAdapter implements IAdapter {
         return this.getMetadata(path);
     }
 
-    async setVisibility(path: string, visibility: Visibility): Promise<IMetadata> {
+    async setVisibility(path: string, visibility: Visibility): Promise<Metadata> {
         path = this.fullPath(path);
 
         await fs.chmodAsync(path, this.getMode(visibility));
@@ -121,13 +121,13 @@ export default class LocalAdapter implements IAdapter {
         return new File(await this.getMetadata(path), contents);
     }
 
-    async readStream(path: string): Promise<IStreamFile> {
+    async readStream(path: string): Promise<StreamFile> {
         path = this.fullPath(path);
 
         return new StreamFile(await this.getMetadata(path), fs.createReadStream(path, { encoding: 'utf8' }));
     }
 
-    async getMetadata(path: string): Promise<IMetadata> {
+    async getMetadata(path: string): Promise<Metadata> {
         path = this.fullPath(path);
 
         const stats = await fs.statAsync(path);
