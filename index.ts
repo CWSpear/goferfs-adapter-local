@@ -4,7 +4,7 @@ import { resolve, basename, dirname, extname, relative } from 'path';
 import { lookup as mimeLookup } from 'mime';
 import * as Bluebird from 'bluebird';
 
-import { IAdapter } from 'goferfs-interfaces';
+import { IAdapter } from 'goferfs-types/interfaces';
 import { Visibility, Metadata, File, StreamFile } from 'goferfs-types';
 
 export default class LocalAdapter implements IAdapter {
@@ -12,7 +12,7 @@ export default class LocalAdapter implements IAdapter {
     private publicVisibilityMode: number;
     private privateVisibilityMode: number;
 
-    targetVersion = '0.5';
+    targetVersion = '1.0';
 
     constructor({
         rootPath,
