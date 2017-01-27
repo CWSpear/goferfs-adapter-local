@@ -313,9 +313,9 @@ glob@~5.0.0:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-goferfs-test-suite@^1.0.0-6:
-  version "1.0.0-6"
-  resolved "https://registry.yarnpkg.com/goferfs-test-suite/-/goferfs-test-suite-1.0.0-6.tgz#945b783e129a688e5d163b6880e736d843fa236a"
+goferfs-test-suite@^1.0.0-7:
+  version "1.0.0-7"
+  resolved "https://registry.yarnpkg.com/goferfs-test-suite/-/goferfs-test-suite-1.0.0-7.tgz#42b8c81e888c0df8d4912c51cf75708c962ffc1f"
   dependencies:
     "@types/chai" "^3.4.34"
     "@types/chai-as-promised" "^0.0.29"
@@ -323,19 +323,19 @@ goferfs-test-suite@^1.0.0-6:
     "@types/node" "^7.0.4"
     chai "^3.5.0"
     chai-as-promised "^6.0.0"
-    goferfs "^1.0.0-4"
+    goferfs "^1.0.0-5"
     mocha "^3.2.0"
     rimraf "^2.5.4"
     tslint "^4.4.2"
     typescript "^2.1.5"
 
-goferfs-types@^1.0.0-4:
-  version "1.0.0-4"
-  resolved "https://registry.yarnpkg.com/goferfs-types/-/goferfs-types-1.0.0-4.tgz#810e5751e118b2c9f8299388e433c0d903301591"
+goferfs-types@^1.0.0-5:
+  version "1.0.0-5"
+  resolved "https://registry.yarnpkg.com/goferfs-types/-/goferfs-types-1.0.0-5.tgz#2322f0cdd5f1dba35cab47a12c3356d4195a7fe7"
 
-goferfs@^1.0.0-4:
-  version "1.0.0-4"
-  resolved "https://registry.yarnpkg.com/goferfs/-/goferfs-1.0.0-4.tgz#f2d923e7c5d68e7578e5936b26b332dd9361addb"
+goferfs@^1.0.0-5:
+  version "1.0.0-5"
+  resolved "https://registry.yarnpkg.com/goferfs/-/goferfs-1.0.0-5.tgz#c77b68abc3734224f6e4dc79264ef56b07b986d7"
 
 got@^5.0.0:
   version "5.7.1"
