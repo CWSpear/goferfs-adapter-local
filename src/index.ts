@@ -170,7 +170,7 @@ export default class LocalAdapter implements IAdapter {
         // for now, we only support regular files
         // (this removes the regular file flag from the mode)
         // i.e. 0o100644 was passed in, and this returns 0o644
-        mode = mode ^ fs.constants.S_IFREG;
+        mode = mode ^ 0o0100000;
 
         if (mode === this.publicVisibilityMode) {
             return Visibility.Public;
