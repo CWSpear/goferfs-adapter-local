@@ -124,7 +124,7 @@ export default class LocalAdapter implements IAdapter {
     async readStream(path: string): Promise<StreamFile> {
         path = this.fullPath(path);
 
-        return new StreamFile(await this.getMetadata(path), fs.createReadStream(path, { encoding: 'utf8' }));
+        return new StreamFile(await this.getMetadata(path), fs.createReadStream(path));
     }
 
     async getMetadata(path: string): Promise<Metadata> {
