@@ -4,14 +4,14 @@ import { resolve, basename, dirname, extname, relative } from 'path';
 import { lookup as mimeLookup } from 'mime';
 import * as Bluebird from 'bluebird';
 
-import { IAdapter } from 'goferfs-types/interfaces';
-import { Visibility, Metadata, File, StreamFile } from 'goferfs-types';
+import { IAdapter, Visibility, Metadata, File, StreamFile, WriteOptions, ReadOptions } from 'goferfs-types';
 
-export default class LocalAdapter implements IAdapter {
+export class LocalAdapter implements IAdapter<LocalAdapter> {
     private rootPath: string;
     private publicVisibilityMode: number;
     private privateVisibilityMode: number;
 
+    adapterName = 'local';
     targetVersion = '1.0';
 
     constructor({
@@ -28,20 +28,20 @@ export default class LocalAdapter implements IAdapter {
         this.privateVisibilityMode = privateVisibilityMode;
     }
 
-    async write(path: string, contents: string, { visibility }: { visibility: Visibility } = { visibility: Visibility.Public }): Promise<Metadata> {
+    async write(path: string, contents: string, { visibility, encoding }: WriteOptions): Promise<Metadata> {
         path = this.fullPath(path);
 
         // @TODO broken type here (mode isn't accepted)
         const writeFileAsync: any = fs.writeFileAsync;
-        await writeFileAsync(path, contents, { mode: this.getMode(visibility) });
+        await writeFileAsync(path, contents, { mode: this.getMode(visibility), encoding });
 
         return this.getMetadata(path);
     }
 
-    async writeStream(path: string, stream: Stream, { visibility }: { visibility: Visibility } = { visibility: Visibility.Public }): Promise<Metadata> {
+    async writeStream(path: string, stream: Stream, { visibility, encoding }: WriteOptions): Promise<Metadata> {
         path = this.fullPath(path);
 
-        stream.pipe(fs.createWriteStream(path, { mode: this.getMode(visibility) }));
+        stream.pipe(fs.createWriteStream(path, { mode: this.getMode(visibility), encoding }));
 
         await new Bluebird((resolve, reject) => {
             stream.on('end', resolve);
@@ -113,18 +113,18 @@ export default class LocalAdapter implements IAdapter {
         return fs.existsAsync(path);
     }
 
-    async read(path: string): Promise<any> {
+    async read(path: string, { encoding }: ReadOptions): Promise<any> {
         path = this.fullPath(path);
 
-        const contents = await fs.readFileAsync(path, 'utf8');
+        const contents = await fs.readFileAsync(path, encoding);
 
         return new File(await this.getMetadata(path), contents);
     }
 
-    async readStream(path: string): Promise<StreamFile> {
+    async readStream(path: string, { encoding }: ReadOptions): Promise<StreamFile> {
         path = this.fullPath(path);
 
-        return new StreamFile(await this.getMetadata(path), fs.createReadStream(path));
+        return new StreamFile(await this.getMetadata(path), fs.createReadStream(path, { encoding }));
     }
 
     async getMetadata(path: string): Promise<Metadata> {

@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { goferTests } from 'goferfs-test-suite';
 
-import LocalAdapter from './.';
+import { LocalAdapter } from './.';
 
 describe('Local Adapter', () => {
     const adapter = new LocalAdapter({
